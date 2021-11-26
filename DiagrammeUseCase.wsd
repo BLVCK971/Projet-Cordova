@@ -1,0 +1,34 @@
+@startuml 
+skinparam actorStyle awesome
+left to right direction
+title GeoSport
+:Utilisateur: as U
+:Spectateur: as S
+:Runner: as R
+
+
+U -up-> S
+U -up-> R
+
+package Application{
+
+S --> (Consulter les défis)
+(Consulter les défis) <.. (Assister à un défi en cours) : <<include>>
+(Consulter les défis) <.. (Consulter résultats des défis passés) : <<include>>
+(Consulter les défis) <.. (Consulter résultats des défis à venir) : <<include>>
+
+
+U --> (Créer un compte)
+
+(Créer un compte) <.. (S'authentifier)  : <<include>>
+R --> (Créer un défi)
+R --> (S'inscrire à un défi)
+R --> (Participer à un défi)
+
+}
+
+
+
+
+
+@enduml
