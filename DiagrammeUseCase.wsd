@@ -1,11 +1,11 @@
 @startuml 
+
 skinparam actorStyle awesome
 left to right direction
 title GeoSport
 :Utilisateur: as U
 :Spectateur: as S
 :Runner: as R
-
 
 U -up-> S
 U -up-> R
@@ -26,9 +26,5 @@ R --> (S'inscrire à un défi)
 R --> (Participer à un défi)
 
 }
-
-
-
-
 
 @enduml
