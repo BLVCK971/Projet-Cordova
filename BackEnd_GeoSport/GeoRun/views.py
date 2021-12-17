@@ -1,15 +1,16 @@
-from django.shortcuts import render
+from GeoRun.models import Runner
+from GeoRun.serializers import RunnerSerializer
+#from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
-from GeoRun.models import Runner
-from GeoRun.serializers import RunnerSerializer
-from rest_framework import viewsets
-# Create your views here.
+from rest_framework import viewsets, permissions, renderers
 from rest_framework.response import Response
-from rest_framework import permissions
-from rest_framework.decorators import action
-from rest_framework import renderers
+from rest_framework.decorators import action, api_view
+
+
+
+
 class RunnerViewSet(viewsets.ModelViewSet):
     queryset = Runner.objects.all()
     serializer_class = RunnerSerializer
@@ -24,6 +25,7 @@ class RunnerViewSet(viewsets.ModelViewSet):
 
 
 @csrf_exempt
+#@api_view(['GET', 'POST'])
 def runner_list(request):
     """
     List all code snippets, or create a new snippet.
@@ -41,7 +43,11 @@ def runner_list(request):
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 
+
+
+
 @csrf_exempt
+#@api_view(['GET', 'PUT', 'DELETE'])
 def runner_detail(request, pk):
     """
     Retrieve, update or delete a code runner.

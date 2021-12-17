@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from GeoRun.models import Runner
+from GeoRun.models import Runner, Defi
 
 
-class RunnerSerializer(serializers.Serializer):
+class RunnerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Runner
-        fields = ('pseudo', 'mail', 'password')
+        fields = ['pseudo', 'mail', 'password']
 
     def create(self, validated_data):
         """
@@ -22,3 +22,14 @@ class RunnerSerializer(serializers.Serializer):
         instance.password = validated_data.get('password', instance.linenos)
         instance.save()
         return instance
+
+class DefiSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Defi
+        fields = ["nom", "createur", "date_creation", "date_debut", "date_fin"]
+
+    def create(self, validated_data):
+        """
+        Create and return a new `Snippet` instance, given the validated data.
+        """
+        return Defi.objects.create(**validated_data)
