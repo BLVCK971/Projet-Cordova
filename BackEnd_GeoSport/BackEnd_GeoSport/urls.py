@@ -1,8 +1,3 @@
-from django.contrib import admin
-from django.urls import path,include
-from django.contrib.auth.models import User
-from rest_framework import routers, serializers, viewsets
-
 """BackEnd_GeoSport URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -18,6 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+from django.contrib import admin
+from django.urls import path,include
+from django.contrib.auth.models import User
+from rest_framework import routers, serializers, viewsets
+
 
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -40,5 +41,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('', include('GeoRun.urls')),
+    path('', include('GeoRun.urls'))
 ]
