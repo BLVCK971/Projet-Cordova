@@ -19,11 +19,116 @@
 
 // Wait for the deviceready event before using any of Cordova's device APIs.
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
-document.addEventListener('deviceready', onDeviceReady, false);
+function chargement(){
+    document.addEventListener('deviceready', onDeviceReady, false);
+}
 
 function onDeviceReady() {
-    // Cordova is now initialized. Have fun!
-
-    console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
-    document.getElementById('deviceready').classList.add('ready');
+    document.getElementById('btGetConnex').addEventListener('click', afficherInfoConnex, false);
+    document.getElementById('btTakePhoto').addEventListener('click', takePhoto, false);
+    document.getElementById('btGalerie').addEventListener('click', takeGalerie, false);
+    document.getElementById('btGeo').addEventListener('click', getPosition, false);
 }
+
+function getPosition(){
+    var options = {
+        enableHighAccuracy:true,
+        timeout:5000
+    };
+    navigator.geolocation.getCurrentPosition(onSuccess,onFail,options);
+}
+function onSuccess(position){
+    alert('Latitude: '          + position.coords.latitude          + '\n' +
+              'Longitude: '         + position.coords.longitude         + '\n' +
+              'Altitude: '          + position.coords.altitude          + '\n' +
+              'Accuracy: '          + position.coords.accuracy          + '\n' +
+              'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+              'Heading: '           + position.coords.heading           + '\n' +
+              'Speed: '             + position.coords.speed             + '\n' +
+              'Timestamp: '         + position.timestamp                + '\n');
+}
+
+function onError(error) {
+        alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
+    }
+
+function takePhoto(){
+    var options ={
+        quality:25,
+        destinationType:Camera.DestinationType.DATA_URL,
+        sourceType:Camera.PictureSourceType.CAMERA
+    };
+    navigator.camera.getPicture(prendrePhoto, onFail, options);
+}    
+
+function prendrePhoto(imageData){
+    var image = document.getElementById('monImage');
+    image.src = "data:image/jpeg;base64," + imageData;
+}
+function onFail(message){
+    document.getElementById("message").innerHTML = message;
+}
+
+function takeGalerie(){
+    var options ={
+        quality:25,
+        destinationType:Camera.DestinationType.DATA_URL,
+        sourceType:Camera.PictureSourceType.SAVEDPHOTOALBUM
+    };
+    navigator.camera.getPicture(prendrePhoto, onFail, options);
+}
+
+
+function afficherInfo(){
+    document.getElementById("info").innerHTML = 
+    "Model: " + device.model+"<br />"+
+    "Plateform: " + device.platform+"<br />"+
+    "Version: " + device.version+"<br />"+
+    "Manufacture: " + device.manufacturer;
+}
+            
+function afficherInfoConnex(){
+    var typeConex = navigator.connection.type;
+    var message = "Connexion: ";
+    if(typeConex == Connection.UNKNOWN) {
+        message = message+" inconnue";
+    }
+    else if(typeConex == Connection.ETHERNET){
+        message = message+" cablée";
+    }
+    else if(typeConex == Connection.WIFI){
+        message = message+" WIFI";
+    }
+    else if(typeConex == Connection.CELL_3G){
+        message = message+" Réseau 3g";
+    }
+    else if(typeConex == Connection.CELL_4G){
+        message = message+" Réseau 4g";
+    }
+    else if(typeConex == Connection.CELL){
+        message = message+" Données célulaires";
+    }
+    else if(typeConex == Connection.NONE){
+        message = message+" Pas de connexion";
+    }
+    document.getElementById("message").innerHTML = message; 
+}
+
+function login(){
+    var pseudo = document.getElementById("mail").value;
+    var nombre = document.getElementById("pwd").value;
+        xhttp = new XMLHttpRequest();
+        xhttp.onload = function(){
+            document.getElementById("message").innerHTML = this.responseText;
+            if(this.responseText == "OK"){
+                document.location.href="pages/accueil.html"; 
+            }
+        }
+        
+        xhttp.open(
+        "GET", "http://erickstattner.com/bdm2/login.php?mail="+pseudo+"&mdp="+nombre, true);
+        xhttp.send();
+    
+
+    }
