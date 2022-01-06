@@ -15,14 +15,15 @@
 
 html, body, main {
 	width: 100%;
-	height: calc(100%-8%);
 	overflow-x: hidden;
 	font-family: 'Lato', sans-serif;
 	color: #ddd;
 	width: 100%;
 	background-color: #051824;
 }
-
+main{
+	height: 100vh;
+}
 /* Navigation  */
 nav{
 	position: fixed;
@@ -70,6 +71,7 @@ section{
 section h2 {
 	font-size: 30px;
 	font-weight: 800;
+	margin-top: 3%;
 	margin-left: 2%;
 }
 .defis{
@@ -93,7 +95,7 @@ section h2 {
 	width: 100%;
 	height: 100%;
 	background-color: #051824;
-	opacity: 0.3;
+	opacity: 0.5;
 }
 .info{
 	position: absolute;
@@ -109,7 +111,8 @@ section h2 {
 	font-size: 30px;
 	font-weight: 700;
 	margin-top: -10px;
-	text-transform: capitalize;;
+	text-transform: capitalize;
+	color: #d44848;
 }
 .info .desc{
 	margin-bottom: 20px;
@@ -151,15 +154,11 @@ section h2 {
 	margin: 0 auto;
 	background-color: #ddd;
 	color: #051824;
-	margin-bottom: 10px;
+	margin-bottom: 15px;
 }
 .perf img{
 	border-radius: 50px 15px 15px 50px;
 }
-.perf .info{
-	
-	
-} 
 .perf .nom-defis{
 	font-weight: 900;
 	
@@ -167,14 +166,50 @@ section h2 {
 .perf .category{
 	font-size: 25px;
 	margin-bottom: 10px;
-	
+	color: #d44848;
 } 
 .perf .info .info-bottom{
 	font-size: 12px;
-	font-weight: 900;
-	
+	font-weight: 900;	
 } 
 
+.all-list{
+	width: 100%;
+}
+.all-list .list{
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+.list .rang{
+	display: flex;
+	flex-direction: column  ;
+	width: 40%;
+	background-color: #ddd;
+	color: #051824;
+	border-radius: 15px;
+	margin-left: 3%;
+	margin-bottom: 3%;
+	padding: 10px;
+}
+.rang .category{
+	color: #d44848;
+	font-size: 25px;
+	font-weight: 800;
+}
+.pool-rank{
+	display: flex;
+	align-items: baseline;
+}
+.pool-rank .fas{
+	margin-left: 1%;
+	color: #8f8500;
+}
+.pool-rank .user-name{
+	margin-left: 4%;
+}
 
 
 /*** Landing page

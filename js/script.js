@@ -120,6 +120,3 @@ var x = setInterval(function() {
     document.getElementById("count").innerHTML = "Start";
   }
 }, 1000);
-console.log("count: "+countDownDate);
-console.log("today: "+now);
-console.log("distance: "+distance);
