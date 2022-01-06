@@ -36,6 +36,7 @@ function getPosition(){
         timeout:5000
     };
     navigator.geolocation.getCurrentPosition(onSuccess,onFail,options);
+    setTimeout('getPosition',10000);
 }
 function onSuccess(position){
     alert('Latitude: '          + position.coords.latitude          + '\n' +
