@@ -93,7 +93,7 @@ var modalEN = document.getElementById('id01EN');
 var modal1EN = document.getElementById('id02EN');
 
 
-var countDownDate = new Date("Jan 05, 2022 21:55:25").getTime();
+var countDownDate = new Date("Jan 07, 2022 14:33:25").getTime();
 
 // Update the count down every 1 second
 var x = setInterval(function() {
