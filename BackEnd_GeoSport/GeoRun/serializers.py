@@ -33,7 +33,19 @@ class DefiSerializer(serializers.ModelSerializer):
         Create and return a new `Snippet` instance, given the validated data.
         """
         return Defi.objects.create(**validated_data)
-    
+
+    def update(self, instance, validated_data):
+        """
+        Update and return an existing `Snippet` instance, given the validated data.
+        """
+        instance.nom = validated_data.get('nom', instance.nom)
+        instance.createur = validated_data.get('createur', instance.createur)
+        instance.date_creation = validated_data.get('date_creation', instance.date_creation)
+        instance.date_debut = validated_data.get('date_debut', instance.date_debut)
+        instance.date_fin = validated_data.get('date_fin', instance.date_fin)
+        instance.save()
+        return instance
+
     def to_representation(self, instance):
         self.fields['createur'] = RunnerSerializer()
         return super(DefiSerializer, self).to_representation(instance)
