@@ -121,15 +121,14 @@ function login(){
     var nombre = document.getElementById("pwd").value;
         xhttp = new XMLHttpRequest();
         xhttp.onload = function(){
-            // get id in json
-            var id = JSON.parse(this.responseText).id;
-            if(id != ""){
+            document.getElementById("message").innerHTML = this.responseText;
+            if(this.responseText == "OK"){
                 document.location.href="pages/accueil.html"; 
             }
         }
         
         xhttp.open(
-        "GET", "http://127.0.0.1:8000/runners?mail="+pseudo+"&mdp="+nombre, true);
+        "GET", "http://erickstattner.com/bdm2/login.php?mail="+pseudo+"&mdp="+nombre, true);
         xhttp.send();
     
 

@@ -1,0 +1,11 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "GeoSport",
+  "short_name": "GeoSport",
+  "version": "io.cordova.hellocordova",
+  "description": "Une application qui permet de créer des défis de course à pied et d'y participer de n'importe où",
+  "author": "MASTER 2 MIAGE Université des Antilles / Equipe 1",
+  "icons": [],
+  "start_url": "index.html"
+}

@@ -13,3 +13,5 @@ kennyljd@gmail.com
 
 
 
+# Construction
+- cordova build android
