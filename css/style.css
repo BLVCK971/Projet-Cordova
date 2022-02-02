@@ -1,73 +1,312 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700');
 
-/* Change styles for cancel button and signup button on extra small screens */
+/* Change styles for cancel button and signup button on extra small screens  
 @media screen and (max-width: 300px) {
   .cancelbtn, .signupbtn {
     width: 100%;
 		height: auto;
   }
-}
+}*/
 
 * {
     padding: 0;
     margin: 0;
 }
 
-body {
+html, body, main {
+	width: 100%;
 	overflow-x: hidden;
 	font-family: 'Lato', sans-serif;
-	color: #505962;
+	color: #ddd;
 	width: 100%;
-	max-width: 100%;
-	width: -ms-fit-content; /* for Edge */
-	width: intrinsic; /* for Safari */
-  width: -webkit-fit-content; /* for Chrome */
-  width: -moz-fit-content; /* for Mozilla */
+	background-color: #051824;
+}
+main{
+	height: 100vh;
+}
+/* Navigation  */
+nav{
+	position: fixed;
+	bottom: 0;
+	background-color: #333;
+	color: #fff;
+	width: 100%;
+	height: 80px;
+	z-index: 999;
 }
 
-/* Navigation */
-.navbar {
-	text-transform: uppercase;
+nav ul{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	color: #ddd;
+}
+nav ul li{
+	list-style: none;
+	color: #ddd;
+}
+nav ul li a{
+	color: #ddd;
+	text-decoration: none;
+}
+nav ul li a:visited{
+	color: #ddd;
+	text-decoration: none;
+}
+
+nav ul li a i{
+	width: 100%;
+	height: 100%;
+}
+
+section{
+	display: flex;
+	width: 100%;
+	margin-bottom: -85px;
+	align-items: center;
+	justify-content: space-around;
+}
+section h2 {
+	font-size: 30px;
+	font-weight: 800;
+	margin-top: 3%;
+	margin-left: 2%;
+}
+hr{
+	background: #ddd;
+	
+}
+.defis{
+	position: relative;
+	color: #fff;
+	width: 95%;
+	height: 200px;
+	margin: 0 auto;
+	border-radius: 25px;
+}
+.defis-img{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 200px;
+	border-radius: 25px;
+}
+.filtre{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: #051824;
+	opacity: 0.5;
+}
+.info{
+	position: absolute;
+	top: 10%;
+	left: 15px;
+	bottom: 5%;
+}
+.info .author{
+	font-size: 15px;
+	font-weight: 500;
+}
+.info .category{
+	font-size: 30px;
 	font-weight: 700;
-	font-size: 1rem;
-	height: 4rem;
+	margin-top: -10px;
+	text-transform: capitalize;
+	color: #d44848;
+}
+.info .desc{
+	margin-bottom: 20px;
+}
+.info-bottom{
+	position: relative;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
 }
 
-.navbar-brand img {
-	height: 3rem;
+.info-bottom .amis img{
+	position: absolute;
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+.amis img:nth-child(2n){
+	left: 5%;
+}
+.btn-defis{
+	width: 150px;
+	height: 40px;
+	background: #fff;
+	border: none;
+	border-radius: 10px;
+	line-break: 1;
+	margin-right: 15px;
+	font-weight: 600;
+}
+.stop{
+	color: #ddd;
+	background: #d44848;
+}
+.go{
+	color: #ddd;
+	background: #00af17;
 }
 
-.navbar-nav li {
-	padding-right: .7rem;
+.perf{
+	position: relative;
+	width: 95%;
+	height: 100px;
+	display: flex;
+	flex-direction: row-reverse;
+	border-radius: 15px;
+	justify-content: space-between;
+	margin: 0 auto;
+	background-color: #ddd;
+	color: #051824;
+	margin-bottom: 15px;
+}
+.perf img{
+	border-radius: 50px 15px 15px 50px;
+}
+.perf .nom-defis{
+	font-weight: 900;
+	
+} 
+.perf .category{
+	font-size: 25px;
+	margin-bottom: 10px;
+	color: #d44848;
+} 
+.perf .info .info-bottom{
+	font-size: 12px;
+	font-weight: 900;	
+} 
+
+.all-list{
+	width: 100%;
+}
+.all-list .list{
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+.list .rang{
+	display: flex;
+	flex-direction: column;
+	width: 95%;
+	background-color: #ddd;
+	color: #051824;
+	border-radius: 15px;
+	margin-bottom: 3%;
+	padding: 10px;
+}
+.rang .category{
+	color: #d44848;
+	font-size: 25px;
+	font-weight: 800;
+	margin-bottom: 10px;
+}
+.pool{
+	display: flex;
+	justify-content: space-between;
+}
+.pool-rank{
+	display: flex;
+	align-items: baseline;
+}
+.pool-rank .fas{
+	margin-left: 1%;
+	color: #8f8500;
+}
+.pool-rank .user-name{
+	margin-left: 4%;
 }
 
-.navbar-dark .navbar-nav .nav-link {
-	color: white !important;
-	padding-top: .8rem;
+main .run{
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+.carte{
+	position: absolute;
+}
+.donnees{
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	align-items: baseline;
+	justify-content:flex-start;
+	width: 100%;
+	background: #ddd;
+	color: #051824;
+	border-radius: 30px 30px 0 0;
+	bottom: 10%;
+	padding: 15px;
+	box-shadow: #333 0px 0px 30px 0px;
+}
+.donnees p{
+	font-size: 20px;
+	margin: -2px 0;
+}
+.donnees p span{
+	font-weight: 900;
 }
 
-.navbar-dark .navbar-nav .nav-link.active,
-.navbar-dark .navbar-nav .nav-link:hover {
-	color: rgba(0, 5, 248, 0.6) !important;
-	background-color: #d4f3fc;
-  border-radius: 5px;
-	width: fit-content;
-	padding: 10px !important;
-}
 
-.navbar-toggler {
-	width: 20%;
-}
 
-/* Landing page */
 
-/* Make the carousel fully responsive */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*** Landing page
+
+ Make the carousel fully responsive
 .carousel-inner img {
 	width: 100%;
 	height: 670px;
   }
 
-/* Text on the carousel*/
+ Text on the carousel
 .caption {
 	width: 100%;
 	max-width: 100%;
@@ -95,15 +334,15 @@ body {
 	padding-left: 10px;
 }
 
-/* Icon Fontawesome color */
-
+/* Icon Fontawesome color  
+/* 
 .fab, .fas {
 	color: blue;
 	margin: 10px;
-}
+}  
 
 
-/* "Défis" section */
+/* "Défis" section 
 .jumbotron {
 	padding: 2rem 0 3.5rem;
 	border-radius: 0;
@@ -126,37 +365,37 @@ p {
 	height: .2rem;
 	background-color: blue;
 	margin: 0 auto;
+}
 
-
-/* button for videos */
+/* button for videos 
 .videocdir {
 	width: 40%;
 	background-color: blue;
 }
 
-/* "Nous sommes... section */
+/* "Nous sommes... section 
 .nous img {
 	width: 100%
 }
 
-/* Position logos and map */
+/* Position logos and map 
 .col-md-4 img {
 	padding-top: 100px;}
 
-/* Professionnels section */
+/* Professionnels section 
 
-.bordpadding-right: 
+.bordpadding-right{ 
   border-left: 6px solid blue;
   background-color: lightgrey;
 }
 
-/*English section*/
+/*English section
 .bord1 {
   border-left: 6px solid blue;
   background-color: lightgrey;
-}
+}  
 
-/* Contact section */
+/* Contact section 
 footer {
 	background-color: rgba(140, 216, 227, 1);
 	padding: 2rem 0 2rem;
@@ -181,11 +420,11 @@ footer svg.svg-inline--fa:hover {
 	color: blue !important;
 }
 
-/* Form */
+/* Form 
  body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box;}
 
-/* Full-width input fields */
+/* Full-width input fields 
 input[type=text], input[type=password], input[type=number], input[type=email], input[type=password] {
   width: 60%;
   padding: 15px;
@@ -195,13 +434,13 @@ input[type=text], input[type=password], input[type=number], input[type=email], i
   background: #f1f1f1;
 }
 
-/* Add a background color when the inputs get focus */
+/* Add a background color when the inputs get focus 
 input[type=text]:focus, input[type=password]:focus, input[type=number]:focus, input[type=email]:focus input[type=password]:focus {
   background-color: #ddd;
   outline: none;
 }
 
-/* Set a style for all buttons */
+/* Set a style for all buttons 
 button {
   background-color: #4CAF50;
   color: white;
@@ -217,53 +456,53 @@ button:hover {
   opacity:1;
 }
 
-/* Extra styles for the cancel button */
+/* Extra styles for the cancel button 
 .cancelbtn {
   padding: 14px 20px;
   background-color: #f44336;
 }
 
-/* Float cancel and signup buttons and add an equal width */
+/* Float cancel and signup buttons and add an equal width 
 .cancelbtn, .signupbtn {
   float: left;
   width: 50%;
 }
 
-/* Add padding to container elements */
+/* Add padding to container elements 
 .container {
   padding: 16px;
 }
 
-/* The Modal (background) */
+/* The Modal (background) 
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: none; /* Hidden by default
+  position: fixed; /* Stay in place 
+  z-index: 1; /* Sit on top 
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto !important; /* Enable scroll if needed */
+  width: 100%; /* Full width 
+  height: 100%; /* Full height 
+  overflow: auto !important; /* Enable scroll if needed 
   background-color: #474e5d;
   padding-top: 50px;
 	text-align: right !important;
 }
 
-/* Modal Content/Box */
+/* Modal Content/Box 
 .modal-content {
   background-color: #fefefe;
-  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered 
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 80%; /* Could be more or less, depending on screen size 
 }
 
-/* Style the horizontal ruler */
+/* Style the horizontal ruler 
 hr {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
 }
 
-/* The Close Button (x) */
+/* The Close Button (x)  
 .close {
   position: absolute;
   right: 35px;
@@ -279,14 +518,14 @@ hr {
   cursor: pointer;
 }
 
-/* Clear floats */
+/* Clear floats  
 .clearfix::after {
   content: "";
   clear: both;
   display: table;
 }
 
-/* End button login */
+/* End button login  
 
 #foot-1 {
 	text-align: center !important;
@@ -295,7 +534,7 @@ hr {
 	align-items: center;
 }
 
-/*English section*/
+/*English section 
 #foot-1EN {
 	text-align: center !important;
 	display: flex;
