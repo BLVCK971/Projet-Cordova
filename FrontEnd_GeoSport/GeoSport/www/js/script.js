@@ -122,3 +122,30 @@ var x = setInterval(function() {
   }
 }, 1000);
 console.log(document.getElementById("count").classList)
+
+function register(){
+  var mail = document.getElementById("mail").value;
+  var pseudo = document.getElementById("pseudo").value;
+  var pwd = document.getElementById("pwd").value;
+      xhttp = new XMLHttpRequest();
+      xhttp.onload = function(){
+        alert(http.responseText);
+
+        var toast = document.getElementById("snackbar");
+        toast.className = "show";
+        setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        
+        document.location.href="index.html"; 
+
+      };
+      xhttp.onerror = function(){
+        var toast = document.getElementById("snackbar-fail");
+        toast.className = "show";
+        setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+      };
+      
+      xhttp.open("GET", "http://127.0.0.1:8000/runners?mail="+mail+"&mdp="+pwd+"&pseudo="+pseudo, true);
+      
+      xhttp.send();
+  }
+
