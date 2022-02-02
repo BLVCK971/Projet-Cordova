@@ -1,13 +1,14 @@
 from django.urls import path, include
-from GeoRun import views
+from GeoRun.views import RunnerView, RunnerDetailView, DefiView, DefiDetailView
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register(r'list', views.RunnerViewSet)
 
 
 urlpatterns = [
-    path('runners/list/', views.runner_list),
-    path('runners/<int:pk>', views.runner_detail),
-    path('runners/', include(router.urls))
+    path('runners', RunnerView.as_view()),
+    path('runners/<int:pk>', RunnerDetailView.as_view()),
+    path('defis', DefiView.as_view()),
+    path('defis/<int:pk>', DefiDetailView.as_view()),
+    path('runners/api', include(router.urls))
 ]
