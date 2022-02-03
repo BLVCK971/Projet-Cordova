@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django_filters',
     'rest_framework',
     'GeoRun.apps.GeorunConfig',
     'django.contrib.admin',

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from GeoRun.models import Runner, Defi
+from GeoRun.models import Runner, Defi, Participation
 
 
 class RunnerSerializer(serializers.ModelSerializer):
@@ -49,3 +49,30 @@ class DefiSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         self.fields['createur'] = RunnerSerializer()
         return super(DefiSerializer, self).to_representation(instance)
+
+
+class ParticipationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Participation
+        fields = ['id', 'participant', 'defi', 'altitude', 'distance']
+
+    def create(self, validated_data):
+        """
+        Create and return a new `Snippet` instance, given the validated data.
+        """
+        return Participation.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        """
+        Update and return an existing `Snippet` instance, given the validated data.
+        """
+        instance.altitude = validated_data.get('altitude', instance.altitude)
+        instance.distance = validated_data.get('distance', instance.distance)
+
+        instance.save()
+        return instance
+
+    def to_representation(self, instance):
+        self.fields['participant'] = RunnerSerializer()
+        self.fields['defi'] = DefiSerializer()
+        return super(ParticipationSerializer, self).to_representation(instance)
