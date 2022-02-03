@@ -13,3 +13,13 @@ class Defi(models.Model):
     date_creation = models.DateTimeField(auto_now_add=True)
     date_debut = models.DateTimeField()
     date_fin = models.DateTimeField()
+
+class Participation(models.Model):
+    participant=models.ForeignKey(Runner, on_delete=models.CASCADE)
+    defi=models.ForeignKey(Defi, on_delete=models.CASCADE)
+    altitude=models.IntegerField(default=0)
+    distance=models.IntegerField(default=0)
+
+    class Meta:
+        unique_together = ('participant', 'defi',)
+
