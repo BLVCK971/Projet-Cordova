@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-(7*pzxl5vr1j9hz$mo($n7_wiiybjah5r!0@m%#83n8pu24i@t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["backendgeosport.azurewebsites.net"]
 
 
 # Application definition

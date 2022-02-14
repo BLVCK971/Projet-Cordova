@@ -129,7 +129,7 @@ function login(){
         }
         
         xhttp.open(
-        "GET", "http://127.0.0.1:8000/runners?mail="+pseudo+"&mdp="+nombre, true);
+        "GET", "https://backendgeosport.azurewebsites.net//runners?mail="+pseudo+"&mdp="+nombre, true);
         xhttp.send();
     
 
