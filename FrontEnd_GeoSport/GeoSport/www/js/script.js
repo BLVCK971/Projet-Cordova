@@ -146,7 +146,7 @@ function register(){
         setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
       };
       
-      xhttp.open("GET", "http://127.0.0.1:8000/runners?mail="+mail+"&mdp="+pwd+"&pseudo="+pseudo, true);
+      xhttp.open("GET", "https://backendgeosport.azurewebsites.net/runners?mail="+mail+"&mdp="+pwd+"&pseudo="+pseudo, true);
       
       xhttp.send();
   }
@@ -178,7 +178,7 @@ function register(){
 
         console.log(idCreateur);
         
-        xhttp.open("GET", "http://127.0.0.1:8000/defis?nom="+nom+"&type="+type+"&dateDebut="+dateDebut
+        xhttp.open("GET", "https://backendgeosport.azurewebsites.net/defis?nom="+nom+"&type="+type+"&dateDebut="+dateDebut
         +"&duree="+duree+"&desc="+desc+"&idCreateur="+idCreateur+"&date_creation="+date_creation, true);
 
         xhttp.send();
