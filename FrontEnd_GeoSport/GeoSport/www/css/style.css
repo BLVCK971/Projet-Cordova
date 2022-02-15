@@ -304,6 +304,8 @@ main .run{
 	to {bottom: 0; opacity: 0;}
   }
 
+  #map { height: 90vh; }
+
 
 
 

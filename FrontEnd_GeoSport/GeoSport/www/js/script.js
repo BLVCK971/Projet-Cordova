@@ -111,17 +111,19 @@ var x = setInterval(function() {
   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
   // Display the result in the element with id="demo"
-  document.getElementById("count").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+  if(document.getElementById("count")){
+    document.getElementById("count").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
 
-  // If the count down is finished, write some text
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("count").innerHTML = "Start";
-    document.getElementById("count").classList.add("go");
-    document.getElementById("count").classList.remove("stop");
+    // If the count down is finished, write some text
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("count").innerHTML = "Start";
+      document.getElementById("count").classList.add("go");
+      document.getElementById("count").classList.remove("stop");
+    }
   }
 }, 1000);
-console.log(document.getElementById("count").classList)
+// console.log(document.getElementById("count").classList)
 
 function register(){
   var mail = document.getElementById("mail").value;
@@ -149,3 +151,35 @@ function register(){
       xhttp.send();
   }
 
+  function creerDefi(){
+
+    var nom = document.getElementById("name").value;
+    var type = document.getElementById("type").value;
+    var dateDebut = document.getElementById("dateDebut").value;
+    var duree = document.getElementById("duree").value;
+    var desc = document.getElementById("desc").value;
+    var idCreateur = localStorage.currentUserId||0;
+    var date_creation = Date.now();
+        xhttp = new XMLHttpRequest();
+        xhttp.onload = function(){
+          alert(http.responseText);
+  
+          var toast = document.getElementById("snackbar");
+          toast.className = "show";
+          setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+          
+          document.location.href="accueil.html";
+        };
+        xhttp.onerror = function(){
+          var toast = document.getElementById("snackbar-fail");
+          toast.className = "show";
+          setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        };
+
+        console.log(idCreateur);
+        
+        xhttp.open("GET", "http://127.0.0.1:8000/defis?nom="+nom+"&type="+type+"&dateDebut="+dateDebut
+        +"&duree="+duree+"&desc="+desc+"&idCreateur="+idCreateur+"&date_creation="+date_creation, true);
+
+        xhttp.send();
+    }

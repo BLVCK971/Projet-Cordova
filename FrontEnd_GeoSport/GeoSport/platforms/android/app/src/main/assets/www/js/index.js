@@ -30,29 +30,29 @@ function onDeviceReady() {
     document.getElementById('btGeo').addEventListener('click', getPosition, false);
 }
 
-function getPosition(){
-    var options = {
-        enableHighAccuracy:true,
-        timeout:5000
-    };
-    navigator.geolocation.getCurrentPosition(onSuccess,onFail,options);
-    setTimeout('getPosition',30000);
-}
-function onSuccess(position){
-    alert('Latitude: '          + position.coords.latitude          + '\n' +
-              'Longitude: '         + position.coords.longitude         + '\n' +
-              'Altitude: '          + position.coords.altitude          + '\n' +
-              'Accuracy: '          + position.coords.accuracy          + '\n' +
-              'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-              'Heading: '           + position.coords.heading           + '\n' +
-              'Speed: '             + position.coords.speed             + '\n' +
-              'Timestamp: '         + position.timestamp                + '\n');
-}
+// function getPosition(){
+//     var options = {
+//         enableHighAccuracy:true,
+//         timeout:5000
+//     };
+//     navigator.geolocation.getCurrentPosition(onSuccess,onFail,options);
+//     setTimeout('getPosition',30000);
+// }
+// function onSuccess(position){
+//     alert('Latitude: '          + position.coords.latitude          + '\n' +
+//               'Longitude: '         + position.coords.longitude         + '\n' +
+//               'Altitude: '          + position.coords.altitude          + '\n' +
+//               'Accuracy: '          + position.coords.accuracy          + '\n' +
+//               'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+//               'Heading: '           + position.coords.heading           + '\n' +
+//               'Speed: '             + position.coords.speed             + '\n' +
+//               'Timestamp: '         + position.timestamp                + '\n');
+// }
 
-function onError(error) {
-        alert('code: '    + error.code    + '\n' +
-              'message: ' + error.message + '\n');
-    }
+// function onError(error) {
+//         alert('code: '    + error.code    + '\n' +
+//               'message: ' + error.message + '\n');
+//     }
 
 function takePhoto(){
     var options ={
@@ -124,13 +124,14 @@ function login(){
             // get id in json
             var id = JSON.parse(this.responseText).id;
             if(id != ""){
-                document.location.href="pages/accueil.html"; 
+                localStorage.currentUserId = id;
+                document.location.href="pages/accueil.html";
+
             }
         }
         
         xhttp.open(
-        "GET", "https://backendgeosport.azurewebsites.net//runners?mail="+pseudo+"&mdp="+nombre, true);
+        "GET", "https://backendgeosport.azurewebsites.net/runners?mail="+pseudo+"&mdp="+nombre, true);
         xhttp.send();
-    
 
     }
