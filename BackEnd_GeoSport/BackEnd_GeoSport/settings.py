@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-(7*pzxl5vr1j9hz$mo($n7_wiiybjah5r!0@m%#83n8pu24i@t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["backendgeosport.azurewebsites.net"]
+ALLOWED_HOSTS = ["backendgeosport.azurewebsites.net", '*']
 
 
 # Application definition
@@ -143,7 +143,7 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_AUTHENTICATION_CLASSES': [],
-    'DEFAULT_PERMISSION_CLASSES': []
+    'DEFAULT_PERMISSION_CLASSES': [],
 }
 LOGGING = {
     'version': 1,

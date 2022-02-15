@@ -12,14 +12,14 @@ class Defi(models.Model):
     createur = models.ForeignKey(Runner, on_delete=models.CASCADE)
     date_creation = models.DateTimeField(auto_now_add=True)
     date_debut = models.DateTimeField()
-    date_fin = models.DateTimeField()
+    type = models.CharField(max_length=50)
+    duree = models.IntegerField()
+    description = models.TextField(max_length=50)
 
 class Participation(models.Model):
     participant=models.ForeignKey(Runner, on_delete=models.CASCADE)
     defi=models.ForeignKey(Defi, on_delete=models.CASCADE)
-    altitude=models.IntegerField(default=0)
-    distance=models.IntegerField(default=0)
+    score=models.FloatField(default=0.0)
 
     class Meta:
         unique_together = ('participant', 'defi',)
-
