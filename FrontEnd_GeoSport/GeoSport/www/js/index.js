@@ -122,10 +122,12 @@ function login(){
         xhttp = new XMLHttpRequest();
         xhttp.onload = function(){
             // get id in json
+            console.log(this.responseText);
             var id = JSON.parse(this.responseText).id;
             if(id != ""){
                 localStorage.currentUserId = id;
-                document.location.href="pages/accueil.html";
+                console.log("my id :",id);
+                // document.location.href="pages/accueil.html";
 
             }
         }

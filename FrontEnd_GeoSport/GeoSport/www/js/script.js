@@ -131,13 +131,13 @@ function register(){
   var pwd = document.getElementById("pwd").value;
       xhttp = new XMLHttpRequest();
       xhttp.onload = function(){
-        alert(http.responseText);
 
         var toast = document.getElementById("snackbar");
         toast.className = "show";
         setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
         
-        document.location.href="index.html"; 
+        // document.location.href="../index.html"; 
+        // 400 (Bad Request)
 
       };
       xhttp.onerror = function(){
@@ -146,7 +146,7 @@ function register(){
         setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
       };
       
-      xhttp.open("GET", "https://backendgeosport.azurewebsites.net/runners?mail="+mail+"&mdp="+pwd+"&pseudo="+pseudo, true);
+      xhttp.open("POST", "https://backendgeosport.azurewebsites.net/runners?mail="+mail+"&mdp="+pwd+"&pseudo="+pseudo, true);
       
       xhttp.send();
   }
@@ -162,13 +162,12 @@ function register(){
     var date_creation = Date.now();
         xhttp = new XMLHttpRequest();
         xhttp.onload = function(){
-          alert(http.responseText);
   
           var toast = document.getElementById("snackbar");
           toast.className = "show";
           setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
           
-          document.location.href="accueil.html";
+          // document.location.href="accueil.html";
         };
         xhttp.onerror = function(){
           var toast = document.getElementById("snackbar-fail");
@@ -178,8 +177,9 @@ function register(){
 
         console.log(idCreateur);
         
-        xhttp.open("GET", "https://backendgeosport.azurewebsites.net/defis?nom="+nom+"&type="+type+"&dateDebut="+dateDebut
+        xhttp.open("POST", "https://backendgeosport.azurewebsites.net/defis?nom="+nom+"&type="+type+"&dateDebut="+dateDebut
         +"&duree="+duree+"&desc="+desc+"&idCreateur="+idCreateur+"&date_creation="+date_creation, true);
+        //400 bad request
 
         xhttp.send();
     }
