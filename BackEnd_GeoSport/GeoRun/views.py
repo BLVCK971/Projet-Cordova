@@ -160,10 +160,7 @@ class ParticipationView(generics.ListCreateAPIView):
         for participation in queryset:
             if participation.defi.nom == name:
                 pseudo=participation.participant.pseudo
-                distance=participation.distance
-                altitude=participation.altitude
-                resultats[pseudo]=distance+2*altitude
-
+                resultats[pseudo]= participation.score
         return JsonResponse(resultats, status=201)
 
 class ParticipationDetailView(APIView):
@@ -193,5 +190,4 @@ class ParticipationDetailView(APIView):
         participation.delete()
         return HttpResponse(status=204)
     
-
 

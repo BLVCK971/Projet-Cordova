@@ -26,7 +26,7 @@ class RunnerSerializer(serializers.ModelSerializer):
 class DefiSerializer(serializers.ModelSerializer):
     class Meta:
         model = Defi
-        fields = ['id', 'nom', 'createur', 'date_creation', 'date_debut', 'date_fin']
+        fields = ['id', 'nom', 'createur', 'date_creation', 'date_debut', 'type', 'duree', 'description']
 
     def create(self, validated_data):
         """
@@ -42,7 +42,9 @@ class DefiSerializer(serializers.ModelSerializer):
         instance.createur = validated_data.get('createur', instance.createur)
         instance.date_creation = validated_data.get('date_creation', instance.date_creation)
         instance.date_debut = validated_data.get('date_debut', instance.date_debut)
-        instance.date_fin = validated_data.get('date_fin', instance.date_fin)
+        instance.type = validated_data.get('type', instance.type)
+        instance.duree = validated_data.get('duree', instance.duree)
+        instance.description = validated_data.get('description', instance.description)
         instance.save()
         return instance
 
@@ -54,7 +56,7 @@ class DefiSerializer(serializers.ModelSerializer):
 class ParticipationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Participation
-        fields = ['id', 'participant', 'defi', 'altitude', 'distance']
+        fields = ['id', 'participant', 'defi', 'score']
 
     def create(self, validated_data):
         """
@@ -66,9 +68,8 @@ class ParticipationSerializer(serializers.ModelSerializer):
         """
         Update and return an existing `Snippet` instance, given the validated data.
         """
-        instance.altitude = validated_data.get('altitude', instance.altitude)
-        instance.distance = validated_data.get('distance', instance.distance)
-
+        instance.score = validated_data.get('score', instance.score)
+        
         instance.save()
         return instance
 
