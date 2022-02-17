@@ -290,3 +290,48 @@ function register(){
 
       // xhttp.send();
     }
+
+    function afficherDefisUser(){
+      var idUser = localStorage.currentUserId;
+      var listeDefis = new XMLHttpRequest();
+      listeDefis.open("GET", localStorage.wsLink+"participations", true);
+
+      listeDefis.onload = function(){
+        var defisEffectue = JSON.parse(listeDefis.responseText)
+      
+        for (var i = 0; i < defisEffectue.length; i++){
+          if(idUser == defisEffectue[i].participant.id){
+            $("#userChallenges tbody").append(
+              "<tr>" + 
+              "<td>"+ defisEffectue[i].defi.nom + "</td>"+
+              "<td>"+ defisEffectue[i].defi.createur.pseudo + "</td>"+
+              "<td>"+ defisEffectue[i].defi.date_debut + "</td>"+
+              "<td>"+ defisEffectue[i].score + "</td></tr>"
+            );
+          }
+        }
+
+        console.log(defisEffectue);
+        /*
+        console.log(defisEffectue[0].defi.createur);
+        console.log(defisEffectue.length);
+        console.log(defisEffectue[2].participant.id);
+        console.log(Object.keys(defisEffectue[i].defi.createur).length)
+        for (var i = 0; i < defisEffectue.length; i++){
+          console.log(Object.keys(defisEffectue[i].defi.createur).length)
+        }
+        */
+              
+      }
+
+      listeDefis.onerror = function(){
+        var toast = document.getElementById("snackbar-fail");
+        toat.className = "show";
+        setTimeout(function(){
+          toat.className = toast.className.replace("show", "");
+
+        }, 3000);
+      }
+      listeDefis.send()
+      
+    }
