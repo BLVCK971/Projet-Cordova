@@ -258,7 +258,13 @@ main .run{
 .donnees p span{
 	font-weight: 900;
 }
-
+.table{
+	margin-top: 20px;
+	font-size: 10px;
+  }
+.table tr th,.table tr td:nth-child(odd){
+  text-align:center;
+  }
 #snackbar, #snackbar-fail{
 	visibility: hidden;
 	min-width: 250px;
@@ -284,6 +290,8 @@ main .run{
 	-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
 	animation: fadein 0.5s, fadeout 0.5s 2.5s;
   }
+
+
   @-webkit-keyframes fadein {
 	from {bottom: 0; opacity: 0;}
 	to {bottom: 30px; opacity: 1;}
