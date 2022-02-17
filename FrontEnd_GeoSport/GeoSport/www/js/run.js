@@ -62,7 +62,7 @@ function onSuccess(position) {
     var polyline = L.polyline(chemin, {color: 'red'}).addTo(map);
 
     // zoom the map to the polyline
-    map.fitBounds(polyline.getBounds());
+    // map.fitBounds(polyline.getBounds());
 }
 
 function onError(error) {
