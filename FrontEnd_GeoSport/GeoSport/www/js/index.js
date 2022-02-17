@@ -19,7 +19,7 @@
 
 // Wait for the deviceready event before using any of Cordova's device APIs.
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
-localStorage.wsLink = "http://112b-2a01-cb20-485a-e000-6d70-e5d5-feec-cdc5.ngrok.io/";
+localStorage.wsLink = "https://112b-2a01-cb20-485a-e000-6d70-e5d5-feec-cdc5.ngrok.io/";
 // localStorage.wsLink = "https://backendgeosport.azurewebsites.net/"
 function chargement(){
     document.addEventListener('deviceready', onDeviceReady, false);

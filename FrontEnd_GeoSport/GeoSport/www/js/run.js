@@ -10,9 +10,10 @@ var Parcours = [];
 var trace = [];
 var chemin = [];
 var map = L.map("map");
+var score = 0;
 var optionsInit = {
     enableHighAccuracy: true,
-    timeout: 5000
+    timeout: 30000
 };
 navigator.geolocation.getCurrentPosition(onSuccessInit, onFail, optionsInit);
 function onSuccessInit(position) {
@@ -29,10 +30,10 @@ function onFail(message){
 var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { enableHighAccuracy: true,frequency: 30000 });
 function onSuccess(position) {
     
-    map.flyTo([position.coords.latitude,position.coords.longitude], 14, {
-        animate: true,
-        duration: .5 // in seconds
-    });
+    // map.flyTo([position.coords.latitude,position.coords.longitude], 14, {
+    //     animate: true,
+    //     duration: .5 // in seconds
+    // });
 
 
     L.marker([position.coords.latitude, position.coords.longitude]).addTo(map)
@@ -82,7 +83,7 @@ function testScore () {
         let coeff = 6;
         let distance = calcDistance(longA, longB, latA, latB);
         console.log((altL - altP) / 6)
-        let score = (distance + (altL - altP) / coeff) * 10;
+        score += (distance + (altL - altP) / coeff) * 10;
         console.log("score",score);
         xhttp = new XMLHttpRequest();
         xhttp.onload = function(){
