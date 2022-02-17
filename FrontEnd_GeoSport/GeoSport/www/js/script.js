@@ -8,7 +8,7 @@ function goToChallenge(id){
 
         xhttp = new XMLHttpRequest();
         xhttp.onload = function(){
-          document.location.href="pages/running.html";
+          document.location.href="./running.html";
         };
         xhttp.onerror = function(){
           console.log("error");
@@ -223,7 +223,7 @@ function register(){
         toast.className = "show";
         setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
         
-        // document.location.href="../index.html";
+        document.location.href="../index.html";
 
       };
       xhttp.onerror = function(){

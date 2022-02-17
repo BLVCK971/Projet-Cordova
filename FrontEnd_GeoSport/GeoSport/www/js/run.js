@@ -6,7 +6,7 @@
 //     navigator.geolocation.watchPosition(onSuccess, onFail, options);
 // }
 // var moment = require('moment');
-var Parcours = [];
+// var Parcours = [];
 var trace = [];
 var chemin = [];
 var map = L.map("map");
@@ -16,22 +16,24 @@ var optionsInit = {
     timeout: 30000
 };
 //=================================
+var challenges = [];
+var myChallenge;
 xhttp = new XMLHttpRequest();
         xhttp.onload = function(){
-            let challenges = [];
+            
             challenges = JSON.parse(this.responseText);
-            let myChallenge ;
+            
             challenges.forEach(chall => {
                 if(chall.id==localStorage.idCurrentChallenge){
                     myChallenge = chall;
                 }
             });
-            document.getElementById("donnees").innerHTML =`                 
-            <p><span>Nom Défis:</span>`+myChallenge.nom+`</p>
-            <p><span>Objectif:</span>`+myChallenge.description+`</p>
-            <p><span>Temps écoulé: </span>A VENIR</p>
-            <p><span>Km parcourus: A VENIR</span></p>
-            <p><span>Altitude: A VENIR</span></p>`;
+            document.getElementById("donnees").innerHTML = `                 
+            <p><span>Nom Défis: </span>`+myChallenge.nom+`</p>
+            <p><span>Objectif: </span>`+myChallenge.description+`</p>
+            <p><span>Temps écoulé: </span> <span id="tempsEcoule">calcul...</span></p>
+            <p><span>Km parcourus: </span><span id="kmParcourus">calcul...</span></p>
+            <p><span>Altitude: </span><span id="altitude">calcul...</span></p>`;
         };
         xhttp.onerror = function(){
             console.log("ERROR ");
@@ -56,6 +58,10 @@ function onFail(message){
 // window.setInterval(getPosition, 3000);
 var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { enableHighAccuracy: true,frequency: 30000 });
 // locate(<Locate options> options?)//leaflet
+var tmpsView = document.getElementById("tempsEcoule").innerHTML;
+var kmView = document.getElementById("kmParcourus").innerHTML;
+var altitude = document.getElementById("altitude").innerHTML;
+
 function onSuccess(position) {
     
     // map.flyTo([position.coords.latitude,position.coords.longitude], 14, {
@@ -83,12 +89,21 @@ function onSuccess(position) {
     //     'Speed: ' + position.coords.speed + '\n' +
     //     'Timestamp: ' + position.timestamp + '\n');
     chemin.push([position.coords.latitude, position.coords.longitude]);
-    Parcours.push({ "latitude": position.coords.latitude, "longitude": position.coords.longitude, "date": new Date() });
+    // Parcours.push({ "latitude": position.coords.latitude, "longitude": position.coords.longitude, "date": new Date() });
 
     // create a red polyline from an array of LatLng points
     trace.push({"latitude":position.coords.latitude,"longitude":position.coords.longitude,"altitude":position.coords.altitude});
     var polyline = L.polyline(chemin, {color: 'red'}).addTo(map);
-
+    console.log(myChallenge)
+    let tmpsSec = (new Date(myChallenge.date_debut).getTime() - new Date().getTime())
+    tmpsView =  Math.floor((tmpsSec % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))+"h "+Math.floor((tmpsSec % (1000 * 60 * 60)) / (1000 * 60))+"min "+Math.floor((tmpsSec % (1000 * 60)) / 1000)+"s";
+    
+    let longA = trace[0].longitude;
+    let longB = trace[trace.length-1].longitude;
+    let latA = trace[0].latitude;
+    let latB = trace[trace.length-1].latitude;
+    kmView  = calcDistance(longA, longB, latA, latB)+"km";
+    altitude = trace[trace.length-1].altitude;
     // zoom the map to the polyline
     // map.fitBounds(polyline.getBounds());
 }
@@ -113,16 +128,37 @@ function testScore () {
         console.log((altL - altP) / 6)
         score += (distance + (altL - altP) / coeff) * 10;
         console.log("score",score);
+        // xhttp = new XMLHttpRequest();
+        // xhttp.onload = function(){
+        // //   alert(http.responseText);          
+        // console.log("POSITION UPDATED");
+        // };
+        // xhttp.onerror = function(){
+        //     console.log("ERROR UPDATE");
+        // };
+        // xhttp.open("PUT", localStorage.wsLink+"participations?defi="+localStorage.idCurrentChallenge+"&self="+localStorage.currentUserId, true);
+        // xhttp.send();
+
         xhttp = new XMLHttpRequest();
         xhttp.onload = function(){
-        //   alert(http.responseText);          
-        console.log("POSITION UPDATED");
+            console.log("success");
         };
         xhttp.onerror = function(){
-            console.log("ERROR UPDATE");
+            console.log("ERROR ");
         };
-        xhttp.open("PUT", localStorage.wsLink+"participations?defi="+nom+"&self="+localStorage.currentUserId, true);
-        xhttp.send();
+        // xhttp.open("GET", localStorage.wsLink+"participations/"+localStorage.currentUserId, true);
+        // xhttp.send();
+
+        xhttp.open("POST", localStorage.wsLink+"participations/"+localStorage.idCurrentChallenge, true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        let param = {
+            "participant" : localStorage.currentUserId,
+            "defi" : myChallenge.id,
+            "score" : score
+        }
+        console.log("param : ",param);
+      
+      xhttp.send(JSON.stringify(param));
     }
 }
 

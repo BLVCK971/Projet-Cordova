@@ -19,7 +19,8 @@
 
 // Wait for the deviceready event before using any of Cordova's device APIs.
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
-localStorage.wsLink = "https://112b-2a01-cb20-485a-e000-6d70-e5d5-feec-cdc5.ngrok.io/";
+// localStorage.wsLink = "https://112b-2a01-cb20-485a-e000-6d70-e5d5-feec-cdc5.ngrok.io/";
+localStorage.wsLink = "https://aa7d-193-251-163-42.ngrok.io/";
 // localStorage.wsLink = "https://backendgeosport.azurewebsites.net/"
 function chargement(){
     document.addEventListener('deviceready', onDeviceReady, false);
@@ -125,17 +126,26 @@ function login(){
         xhttp.onload = function(){
             // get id in json
             console.log(this.responseText);
-            var id = JSON.parse(this.responseText)[0].id;
-            if(id&&id != ""){
-                localStorage.currentUserId = id;
-                console.log("my id :",id);
-                document.location.href="pages/accueil.html";
-
+            let myResponse = JSON.parse(this.responseText);
+            console.log(myResponse);
+            if(myResponse.length>0){
+                var id = myResponse[0].id;
+                if(id&&id != ""){
+                    localStorage.currentUserId = id;
+                    console.log("my id :",id);
+                    document.location.href="pages/accueil.html";
+    
+                }
+            }else{
+                var toast = document.getElementById("snackbar-fail");
+                toast.className = "show";
+                setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
             }
+            
         }
         
         // xhttp.open("GET", "https://backendgeosport.azurewebsites.net/runners?mail="+pseudo+"&mdp="+pass, true);
-        xhttp.open("GET", localStorage.wsLink+"runners?mail="+pseudo+"&mdp="+pass, true);
+        xhttp.open("GET", localStorage.wsLink+"runners?mail="+pseudo+"&password="+pass, true);
         xhttp.send();
         
     }
