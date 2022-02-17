@@ -92,7 +92,7 @@ function testScore () {
         xhttp.onerror = function(){
             console.log("ERROR UPDATE");
         };
-        xhttp.open("PUT", "https://backendgeosport.azurewebsites.net/participations?defi="+nom+"&self="+localStorage.currentUserId, true);
+        xhttp.open("PUT", localStorage.wsLink+"participations?defi="+nom+"&self="+localStorage.currentUserId, true);
         xhttp.send();
     }
 }

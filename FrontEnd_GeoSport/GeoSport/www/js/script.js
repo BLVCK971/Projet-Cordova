@@ -1,3 +1,6 @@
+function chargement(){
+  document.addEventListener('deviceready', onDeviceReady, false);
+}
 //Section French
 // Video 1
 var myVideo1 = document.getElementById("video1"); 
@@ -130,14 +133,14 @@ function register(){
   var pseudo = document.getElementById("pseudo").value;
   var pwd = document.getElementById("pwd").value;
       xhttp = new XMLHttpRequest();
+      
       xhttp.onload = function(){
 
         var toast = document.getElementById("snackbar");
         toast.className = "show";
         setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
         
-        // document.location.href="../index.html"; 
-        // 400 (Bad Request)
+        // document.location.href="../index.html";
 
       };
       xhttp.onerror = function(){
@@ -146,16 +149,24 @@ function register(){
         setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
       };
       
-      xhttp.open("POST", "https://backendgeosport.azurewebsites.net/runners?mail="+mail+"&mdp="+pwd+"&pseudo="+pseudo, true);
+      // xhttp.open("POST", "https://backendgeosport.azurewebsites.net/runners?mail="+mail+"&mdp="+pwd+"&pseudo="+pseudo, true);
+      // xhttp.open("POST", "https://backendgeosport.azurewebsites.net/runners?mail="+mail+"&password="+pwd+"&pseudo="+pseudo, true);
+      xhttp.open("POST", localStorage.wsLink+"runners", true);
+      xhttp.setRequestHeader("Content-Type", "application/json");
+      let param = {
+        "pseudo": pseudo,
+        "mail": mail,
+        "password": pwd
+      }
       
-      xhttp.send();
+      xhttp.send(JSON.stringify(param));
   }
 
   function creerDefi(){
 
     var nom = document.getElementById("name").value;
     var type = document.getElementById("type").value;
-    var dateDebut = document.getElementById("dateDebut").value;
+    var dateDebut = moment(document.getElementById("dateDebut").value).format('YYYY-MM-DDTHH:mm:ss');
     var duree = document.getElementById("duree").value;
     var desc = document.getElementById("desc").value;
     var idCreateur = localStorage.currentUserId||0;
@@ -177,9 +188,22 @@ function register(){
 
         console.log(idCreateur);
         
-        xhttp.open("POST", "https://backendgeosport.azurewebsites.net/defis?nom="+nom+"&type="+type+"&dateDebut="+dateDebut
-        +"&duree="+duree+"&desc="+desc+"&idCreateur="+idCreateur+"&date_creation="+date_creation, true);
-        //400 bad request
+        // xhttp.open("POST", "https://backendgeosport.azurewebsites.net/defis?nom="+nom+"&type="+type+"&dateDebut="+dateDebut
+        // +"&duree="+duree+"&desc="+desc+"&idCreateur="+idCreateur+"&date_creation="+date_creation, true);
+        
+        xhttp.open("POST", localStorage.wsLink+"defis", true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        let param = {
+          "nom": nom,
+          "createur": idCreateur,
+          "date_debut": dateDebut,
+          "type": type,
+          "duree": duree,
+          "description": desc
+        }
+        console.log("param : ",param);
+      
+      xhttp.send(JSON.stringify(param));
 
-        xhttp.send();
+      // xhttp.send();
     }
