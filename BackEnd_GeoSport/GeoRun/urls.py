@@ -11,7 +11,7 @@ urlpatterns = [
     path('defis', DefiView.as_view()),
     path('defis/<int:pk>', DefiDetailView.as_view()),
     path('participations', ParticipationView.as_view()),
-    path('participations/<int:pk>', ParticipationDetailView.as_view()),
-    path('participations/<slug:name>/resultats', ParticipationView.get_result),
-    path('runners/api', include(router.urls))
+    path('participations/<int:pk>', ParticipationDetailView.as_view())
+    #path('participations/<slug:name>/resultats', ParticipationView.get_result),
+    #path('runners/api', include(router.urls))
 ]
