@@ -1,6 +1,66 @@
 function chargement(){
   document.addEventListener('deviceready', onDeviceReady, false);
 }
+var challenges=[];
+function goToChallenge(id){
+  localStorage.idCurrentChallenge = id;
+  console.log("idChallenge :", id);
+
+        xhttp = new XMLHttpRequest();
+        xhttp.onload = function(){
+          document.location.href="pages/running.html";
+        };
+        xhttp.onerror = function(){
+          console.log("error");
+        };
+        
+        xhttp.open("POST", localStorage.wsLink+"participations", true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        let param = {
+          "participant": localStorage.currentUserId,
+          "defi": id
+        }
+        console.log("param : ",param);
+      
+      xhttp.send(JSON.stringify(param));
+}
+function chargedAccueil(){
+  xhttp = new XMLHttpRequest();
+      
+  xhttp.onload = function(){
+    console.log(this.responseText);
+    challenges = JSON.parse(this.responseText);
+    challenges.forEach(chall => {
+      document.getElementById("defis").innerHTML+=`
+      <div class="defis">
+                        <img class=defis-img src="../img/cour1.jpg" alt="Cardio">
+                        <div class="filtre"></div>
+                        <div class="info">
+                            <div class="author">`+chall.createur.pseudo+`</div>
+                            <div class="category">`+chall.type+`</div>
+                            <div class="desc">`+chall.description+`</div>
+                            <div class="info-bottom">
+                                <div class="amis">
+                                    <img src="../img/cour2.jpg">
+                                    <img src="../img/cour3.jpg">
+                                </div>
+                                <div id=start>
+                                    <button onclick='goToChallenge(`+chall.id+`)' id="count" class="count btn-defis stop" value='`+chall.date_debut+`'></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+        `;
+    });
+  };
+  xhttp.onerror = function(){
+    console.log("ERROR");
+  };
+      xhttp.open("GET", localStorage.wsLink+"defis", true);
+      
+      xhttp.send();
+}
 //Section French
 // Video 1
 var myVideo1 = document.getElementById("video1"); 
@@ -96,34 +156,57 @@ var modalEN = document.getElementById('id01EN');
 var modal1EN = document.getElementById('id02EN');
 
 
-var countDownDate = new Date("Jan 07, 2022 14:33:25").getTime();
+// var countDownDate = new Date("Jan 07, 2022 14:33:25").getTime();
 
 // Update the count down every 1 second
 var x = setInterval(function() {
 
-  // Get today's date and time
-  var now = new Date().getTime();
 
-  // Find the distance between now and the count down date
-  var distance = countDownDate - now;
 
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
 
   // Display the result in the element with id="demo"
-  if(document.getElementById("count")){
-    document.getElementById("count").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+  // if(document.getElementById("count")){
+  //   document.getElementById("count").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
 
-    // If the count down is finished, write some text
-    if (distance < 0) {
-      clearInterval(x);
-      document.getElementById("count").innerHTML = "Start";
-      document.getElementById("count").classList.add("go");
-      document.getElementById("count").classList.remove("stop");
-    }
+  //   // If the count down is finished, write some text
+  //   if (distance < 0) {
+  //     clearInterval(x);
+  //     document.getElementById("count").innerHTML = "Start";
+  //     document.getElementById("count").classList.add("go");
+  //     document.getElementById("count").classList.remove("stop");
+  //   }
+  // }
+  var now = new Date().getTime();
+
+  if(document.getElementsByClassName("count")){
+    var els = document.getElementsByClassName("count")
+    Array.prototype.forEach.call(els, function(element) {
+      // console.log(element);
+      // <button onclick="getPosition()" id="count" class="count btn-defis stop"></button>
+      var countDownDate = new Date(element.value).getTime();
+        // Get today's date and time
+        
+        // Find the distance between now and the count down date
+          let distance = countDownDate - now;
+
+          // Time calculations for days, hours, minutes and seconds
+          let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      element.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+      // If the count down is finished, write some text
+      if (distance < 0) {
+        clearInterval(x);
+        element.innerHTML = "Start";
+        element.classList.add("go");
+        element.classList.remove("stop");
+      }
+    }); 
+
+
   }
 }, 1000);
 // console.log(document.getElementById("count").classList)

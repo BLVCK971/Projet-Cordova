@@ -15,6 +15,33 @@ var optionsInit = {
     enableHighAccuracy: true,
     timeout: 30000
 };
+//=================================
+xhttp = new XMLHttpRequest();
+        xhttp.onload = function(){
+            let challenges = [];
+            challenges = JSON.parse(this.responseText);
+            let myChallenge ;
+            challenges.forEach(chall => {
+                if(chall.id==localStorage.idCurrentChallenge){
+                    myChallenge = chall;
+                }
+            });
+            document.getElementById("donnees").innerHTML =`                 
+            <p><span>Nom Défis:</span>`+myChallenge.nom+`</p>
+            <p><span>Objectif:</span>`+myChallenge.description+`</p>
+            <p><span>Temps écoulé: </span>A VENIR</p>
+            <p><span>Km parcourus: A VENIR</span></p>
+            <p><span>Altitude: A VENIR</span></p>`;
+        };
+        xhttp.onerror = function(){
+            console.log("ERROR ");
+        };
+        xhttp.open("GET", localStorage.wsLink+"defis?id="+localStorage.idCurrentChallenge, true);
+        xhttp.send();
+
+
+
+            //=====================
 navigator.geolocation.getCurrentPosition(onSuccessInit, onFail, optionsInit);
 function onSuccessInit(position) {
     L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png").addTo(map);
@@ -28,6 +55,7 @@ function onFail(message){
 
 // window.setInterval(getPosition, 3000);
 var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { enableHighAccuracy: true,frequency: 30000 });
+// locate(<Locate options> options?)//leaflet
 function onSuccess(position) {
     
     // map.flyTo([position.coords.latitude,position.coords.longitude], 14, {
